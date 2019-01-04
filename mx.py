@@ -1,6 +1,5 @@
 import dns.resolver
 from flask import Flask, request, render_template
-import json
 
 debug = False
 testdomains = ['outlook.com','hotmail.com', '7e837e8378e328.com', 'ba.com', 'checkpoint.com', 'google.com', 'aaa.com']
@@ -30,4 +29,5 @@ def json_example():
     return render_template('result.html', result = out)
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=8080, debug=True)
+    app.run(host='127.0.0.1', port=8080, debug=True, use_reloader=True)
+    #app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT')|'8080')
