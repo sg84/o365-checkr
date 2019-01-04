@@ -17,4 +17,4 @@ COPY . /app
 
 WORKDIR /app
 
-CMD ["gunicorn", "-w 4", "-b 8080", "mx:app"]
+CMD ["gunicorn", "-w",  "4", "-b", ":8080", "mx:app"]
