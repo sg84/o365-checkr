@@ -30,4 +30,3 @@ def json_example():
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8080, debug=True, use_reloader=True)
-    #app.run(debug=True, host='0.0.0.0', port=os.environ.get('PORT')|'8080')
