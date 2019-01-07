@@ -36,7 +36,7 @@ def form():
 def json_example():
     form_domains = request.form['domains'].split("\r\n")
     out = CheckDomains(form_domains)
-    return render_template('result.1.html', result = out)
+    return render_template('result.html', result = out)
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=8080, debug=True, use_reloader=True)
