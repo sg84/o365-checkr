@@ -14,7 +14,7 @@ def CheckDomains(domains):
                 elif "aspmx.l.google.com" in mx.to_text():
                     results[domain] = "GSuite"
                 else:
-                    results[domain] = "Someting else"
+                    results[domain] = "Something else"
         except:
             if debug:
                 print("Error:\t{} isn't a valid domain".format(domain))
