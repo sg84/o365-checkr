@@ -20,7 +20,7 @@ def CheckDomains(domains):
                 elif "mimecast.com" in mx.to_text():
                     results[domain] = "Mimecast"
                 else:
-                    results[domain] = "Something else"
+                    results[domain] = "Something else: {}".format(mx.to_text)
         except:
             if debug:
                 print("Error:\t{} isn't a valid domain".format(domain))
