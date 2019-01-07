@@ -9,16 +9,18 @@ def CheckDomains(domains):
     for domain in domains:
         try:
             for mx in dns.resolver.query(domain, 'MX'):
-                if "protection.outlook.com" in mx.to_text():
+                if "protection.outlook.com" in mx.to_text().lower():
                     results[domain] = "O365"
-                elif "aspmx.l.google.com" in mx.to_text():
+                elif "aspmx.l.google.com" in mx.to_text().lower():
                     results[domain] = "GSuite"
-                elif "mailcontrol.com" in mx.to_text():
+                elif "mailcontrol.com" in mx.to_text().lower():
                     results[domain] = "Forcepoint"
-                elif "messagelabs.com" in mx.to_text():
+                elif "messagelabs.com" in mx.to_text().lower():
                     results[domain] = "Symmantec"
-                elif "mimecast.com" in mx.to_text():
-                    results[domain] = "Mimecast"
+                elif "mimecast.com" in mx.to_text().lower():
+                    results[domain] = "Mimecast" 
+                elif "pphosted.com" in mx.to_text().lower():
+                    results[domain] = "Proofpoint"
                 else:
                     results[domain] = "Something else: {}".format(mx.to_text)
         except:
