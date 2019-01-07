@@ -2,7 +2,6 @@ import dns.resolver
 from flask import Flask, request, render_template
 
 debug = False
-testdomains = ['outlook.com','hotmail.com', '7e837e8378e328.com', 'ba.com', 'checkpoint.com', 'google.com', 'aaa.com']
 
 def CheckDomains(domains):
     results = {}
@@ -13,14 +12,24 @@ def CheckDomains(domains):
                     results[domain] = "O365"
                 elif "aspmx.l.google.com" in mx.to_text().lower():
                     results[domain] = "GSuite"
+                elif "googlemail.com" in mx.to_text().lower():
+                    results[domain] = "GSuite (Maybe)"
                 elif "mailcontrol.com" in mx.to_text().lower():
                     results[domain] = "Forcepoint"
                 elif "messagelabs.com" in mx.to_text().lower():
                     results[domain] = "Symmantec"
-                elif "mimecast.com" in mx.to_text().lower():
+                elif "mimecast" in mx.to_text().lower():
                     results[domain] = "Mimecast" 
                 elif "pphosted.com" in mx.to_text().lower():
                     results[domain] = "Proofpoint"
+                elif "ppe-hosted.com" in mx.to_text().lower():
+                    results[domain] = "Proofpoint (Essentials)"
+                elif "barracudanetworks.com" in mx.to_text().lower():
+                    results[domain] = "Baracuda"
+                elif "icritical.com" in mx.to_text().lower():
+                    results[domain] = "iCritical/Fusemail"
+                elif "trendmicro" in mx.to_text().lower():
+                    results[domain] = "Trend Micro"
                 else:
                     results[domain] = "Something else: {}".format(mx.to_text)
         except:
@@ -28,11 +37,6 @@ def CheckDomains(domains):
                 print("Error:\t{} isn't a valid domain".format(domain))
     return results
 
-def Results(r):
-    print(r)
-
-#res = CheckDomains(testdomains)
-#Results(res)
 
 app = Flask(__name__)
 
