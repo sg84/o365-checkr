@@ -13,6 +13,12 @@ def CheckDomains(domains):
                     results[domain] = "O365"
                 elif "aspmx.l.google.com" in mx.to_text():
                     results[domain] = "GSuite"
+                elif "mailcontrol.com" in mx.to_text():
+                    results[domain] = "Forcepoint"
+                elif "messagelabs.com" in mx.to_text():
+                    results[domain] = "Symmantec"
+                elif "mimecast.com" in mx.to_text():
+                    results[domain] = "Mimecast"
                 else:
                     results[domain] = "Something else"
         except:
