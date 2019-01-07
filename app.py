@@ -31,7 +31,8 @@ def CheckDomains(domains):
                 elif "trendmicro" in mx.to_text().lower():
                     results[domain] = "Trend Micro"
                 else:
-                    results[domain] = "Something else: {}".format(mx.to_text)
+                    #results[domain] = "Something else: {}".format(mx.to_text)
+                    results[domain] = "Other"
         except:
             if debug:
                 print("Error:\t{} isn't a valid domain".format(domain))
