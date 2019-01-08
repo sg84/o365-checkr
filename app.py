@@ -8,9 +8,9 @@ def CheckDomains(domains):
     for domain in domains:
         try:
             for mx in dns.resolver.query(domain, 'MX'):
-                if "protection.outlook.com" in mx.to_text().lower():
+                if "protection.outlook.com" in mx.to_text().lower(): #ugghh - python doesn't have switch/case?
                     results[domain] = "O365"
-                elif "aspmx.l.google.com" in mx.to_text().lower():
+                elif "aspmx.l.google.com" in mx.to_text().lower(): #is lower() needed? if so, should have made a new variable... ah well
                     results[domain] = "GSuite"
                 elif "googlemail.com" in mx.to_text().lower():
                     results[domain] = "GSuite (Maybe)"
