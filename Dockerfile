@@ -19,4 +19,4 @@ WORKDIR /app
 
 EXPOSE 8080
 
-CMD ["gunicorn", "-w",  "4", "-b", ":8080", "app:app"]
+CMD ["gunicorn", "-w",  "1", "-b", ":8080", "app:app"]

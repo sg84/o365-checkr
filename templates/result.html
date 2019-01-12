@@ -22,7 +22,7 @@
         <div class="container">
             <div class="row"> 
                 <div class="col s12">
-                <h4>Results</h4>
+                <h4>RESULTS</h4>
                     <ul>
                         <li>If a known inline MTA Security Product is in use, it will be shown below, we don't know if email is then subsequently delivered to O365/GSuite</li>
                         <li>Green indicates email is delivered directly to O365/GSuite</li>
@@ -36,12 +36,18 @@
                                 <!-- <td> {{ value }} </td> -->
                                 <!-- <td> <a class='btn tooltipped' data-position='bottom' data-tooltip='MX'>{{ value }}</a> </td> -->
                                 
-                                {% if "O365" in value %}
-                                    {% set btn_colour = "green lighten-1" %}
+                                {% if "Office 365" in value %}
+                                    {% set btn_colour = "blue lighten-1" %}
                                 {% elif "GSuite" in value %}
-                                    {% set btn_colour = "green lighten-1" %}
+                                    {% set btn_colour = "red lighten-1" %}
+                                {% elif "Forcepoint" in value %}
+                                    {% set btn_colour = "green" %}
+                                {% elif "Symantec" in value %}
+                                    {% set btn_colour = "yellow darken-1" %}   
+                                {% elif "Unknown" in value %}
+                                    {% set btn_colour = "grey" %}
                                 {% else %}
-                                    {% set btn_colour = "deep-orange lighten-3" %}
+                                    {% set btn_colour = "orange lighten-1" %}
                                 {% endif %}
                                     <td> <a class='btn {{ btn_colour }}'>{{ value }} </a></td>
                             </tr>

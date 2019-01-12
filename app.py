@@ -3,36 +3,28 @@ from flask import Flask, request, render_template
 
 debug = False
 
+mx_dict = {
+    "protection.outlook.com" : "Office 365",
+    "aspmx.l.google.com" : "GSuite",
+    "mailcontrol.com" : "Forcepoint",
+    "messagelabs.com" : "Symantec",
+    "mimecast" : "Mimecast",
+    "pphosted.com" : "Proofpoint",
+    "ppe-hosted.com" : "Proofpoint (Essentials)",
+    "barracudanetworks.com" : "Barracuda",
+    "icritical.com" : "iCritical / Fusemail",
+    "trendmicro" : "Trend Micro"
+}
 def CheckDomains(domains):
     results = {}
     for domain in domains:
         try:
             for mx in dns.resolver.query(domain, 'MX'):
-                if "protection.outlook.com" in mx.to_text().lower(): #ugghh - python doesn't have switch/case?
-                    results[domain] = "O365"
-                elif "aspmx.l.google.com" in mx.to_text().lower(): #is lower() needed? if so, should have made a new variable... ah well.
-                    results[domain] = "GSuite"
-                elif "googlemail.com" in mx.to_text().lower():
-                    results[domain] = "GSuite (Maybe)"
-                elif "mailcontrol.com" in mx.to_text().lower():
-                    results[domain] = "Forcepoint"
-                elif "messagelabs.com" in mx.to_text().lower():
-                    results[domain] = "Symmantec"
-                elif "mimecast" in mx.to_text().lower():
-                    results[domain] = "Mimecast" 
-                elif "pphosted.com" in mx.to_text().lower():
-                    results[domain] = "Proofpoint"
-                elif "ppe-hosted.com" in mx.to_text().lower():
-                    results[domain] = "Proofpoint (Essentials)"
-                elif "barracudanetworks.com" in mx.to_text().lower():
-                    results[domain] = "Baracuda"
-                elif "icritical.com" in mx.to_text().lower():
-                    results[domain] = "iCritical/Fusemail"
-                elif "trendmicro" in mx.to_text().lower():
-                    results[domain] = "Trend Micro"
-                else:
-                    #results[domain] = "Something else: {}".format(mx.to_text)
-                    results[domain] = "Other"
+                results[domain] = 'Unknown SaaS solution'
+                for key, val in mx_dict.items():
+                    if key in mx.to_text().lower():
+                        results[domain] = val
+                        break
         except:
             if debug:
                 print("Error:\t{} isn't a valid domain".format(domain))
